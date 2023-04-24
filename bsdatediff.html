@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dateformat</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #131212;
+        }
+    </style>
+    <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
+        rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <h1>Validating BS Date</h1>
+    <input type="text" id="bsdate" placeholder="Enter BS date (YYYY-MM-DD)">
+    <p id="sdate"></p>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
+        type="text/javascript"></script>
+
+    <script>
+        var bsInput = document.getElementById('bsdate');
+        var validationResult = document.getElementById('sdate');
+        var regex = /^[0-9]{4}-[0-9]{2}-[0-9]{2}$/;
+
+        bsInput.addEventListener('input', function() {
+            var inputValue = bsInput.value;
+            if (regex.test(inputValue)) {
+                var dateComponents = inputValue.split('-');
+                var year = parseInt(dateComponents[0]);
+                var month = parseInt(dateComponents[1]);
+                var day = parseInt(dateComponents[2]);
+
+                if (year >= 200 && year <= 20999 && month >= 1 && month <= 12 && day >= 1 && day <= 32) 
+                {
+                    validationResult.textContent = 'Valid BS date: ' + year + '-' + month + '-' + day;
+                } 
+                else 
+                {
+                    validationResult.textContent = 'Invalid BS date: ' + year + '-' + month + '-' + day;
+                }
+            } else 
+            {
+                validationResult.textContent = 'Invalid date format: ' + inputValue;
+            }
+        });
+    </script>
+</body>
+
+</html>

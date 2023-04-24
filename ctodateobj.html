@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parse</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #131212;
+        }
+    </style>
+    <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
+        rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <h1>2.converttoobj</h1>
+    <input type="text" id="bsdate" placeholder="YYYY-MM-DD" />
+    <p id="sdate"></p>
+    <div id="parsedDate"></div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
+        type="text/javascript"></script>
+    <script>
+        // var bsInput = document.getElementById('bsdate');
+        //     bsInput.nepaliDatePicker({
+        //     dateFormat:"YYYY-MM-DD",
+        //     closeOnDateSelect: true,
+          
+            //     var date = date.split('-');
+            //     var bsInput = NepaliFunctions.ConvertToDateObject(date, "YYYY-MM-DD");
+            //     console.log(date.toDateString());
+
+        
+            // });
+//             var bsInput = document.getElementById('bsdate');
+// bsInput.nepaliDatePicker({
+//     dateFormat: "YYYY-MM-DD",
+//     closeOnDateSelect: true,
+    // onchange: function() {
+    //     var date = bsInput.val();
+    //     var dateParts = date.split('-');
+    //     console.log(dateParts)
+    //     var bsInputDateObject = NepaliFunctions.ConvertToDateObject(date, "YYYY-MM-DD");
+    //     console.log(bsInputDateObject);
+    // }
+// });
+var bsInput = document.getElementById('bsdate');
+
+bsInput.nepaliDatePicker({
+    dateFormat: "YYYY-MM-DD",
+    closeOnDateSelect: true,
+    onChange: function() {
+        var dateString = bsInput.value; 
+            // Convert date string to date object
+            var dateComponents = dateString.split("-");
+            var year = parseInt(dateComponents[0]);
+            var month = parseInt(dateComponents[1]) - 1; // JavaScript months are zero-based
+            var day = parseInt(dateComponents[2]);
+            var dateObject = new Date(year, month, day);
+
+            // Format date object to desired format
+            var formattedDate = dateObject.getFullYear() + '-' + (dateObject.getMonth() + 1).toString().padStart(2, '0') + '-' + dateObject.getDate().toString().padStart(2, '0');
+            
+            console.log(formattedDate);
+            document.getElementById('sdate').textContent = 'Year: ' + year + '\nMonth: ' + (month+1) + '\nDay: ' + day;
+}});
+
+console.log(NepaliFunctions.ConvertToDateObject("2067-01-23", "YYYY-MM-DD"));
+
+    </script>
+</body>
+
+</html>
+
+

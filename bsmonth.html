@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bsmonth</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #131212;
+        }
+    </style>
+    <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
+        rel="stylesheet" type="text/css" />
+        
+        
+
+</head>
+<body>
+    <h1>BSmonth</h1>
+    <input type="text" id="bsmonth" placeholder="Enter BS month (YYYY-MM)">
+    <p id="smonth"></p>
+    <p id="n"></p>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+        <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
+        type="text/javascript"></script>
+        <script>
+           var bsInput = document.getElementById('bsmonth');
+        bsInput.nepaliDatePicker({
+            dateFormat: "YYYY-MM-DD",
+            closeOnDateSelect: true,
+            onChange:function(){
+                var date = bsInput.value;
+                var dates=date.split('-');
+                // var month=NepaliFunctions.GetBsMonths()
+                var bsdate=NepaliFunctions.GetBsMonth(parseInt(dates[1])-1)
+                document.getElementById("smonth").innerHTML=bsdate;
+                console.log(bsdate)
+                console.log(NepaliFunctions.GetBsMonth(12))
+            }
+        
+        });
+    </script>
+    
+</body>
+</html>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSmonth</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #131212;
+        }
+    </style>
+    <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
+        rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <h1>BSmonth</h1>
+    <input type="text" id="bsmonth" placeholder="Enter BS month (YYYY-MM)">
+    <p id="maina"></p>
+ 
+   
+    <h1>day checker</h1>
+    <input type="text" id="daycheck" placeholder="Enter the number from 0 to 6">
+    <button onclick="daychecker()">check</button>
+    <p id="day"></p>
+    <h1>for showing short weekbs</h1>
+    <input type="text" id="shortweek" placeholder="Enter the number from 0 to 6">
+    <button onclick="shortweek()">check</button>
+    <p id="s"></p>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
+        type="text/javascript"></script>
+    <script>
+    var bsInput = $('#bsmonth');
+bsInput.nepaliDatePicker({
+    dateFormat: "YYYY-MM-DD",
+    closeOnDateSelect: true,
+    onChange: function() {
+        var date = bsInput.val();
+        var dates = date.split('-');
+        var day = parseInt(dates[2]);
+            var bsMonth = NepaliFunctions.GetBsMonthInUnicode(parseInt(dates[1]) - 1);
+            document.getElementById("maina").innerHTML = bsMonth;
+    }
+  
+
+});
+function daychecker() {
+    var dayinput = document.getElementById('daycheck');
+    var day = parseInt(dayinput.value); // Convert input value to an integer
+
+    if (isNaN(day) || day < 0 || day > 6) {
+        // Show an error message if input is not a number or not between 0 and 6
+        document.getElementById("day").innerHTML = "Error: Please enter a number between 0 and 6";
+    } else {
+        // Otherwise, update the day element with the NepaliFunctions.GetBsDayUnicode result
+        document.getElementById("day").innerHTML = NepaliFunctions.GetBsDayUnicode(day);
+    }
+}
+// for displaying short week
+function shortweek() {
+    var shortweekinput = document.getElementById('shortweek');
+    if (isNaN(shortweekinput.value) || shortweekinput.value < 0 || shortweekinput.value > 6) {
+        // Show an error message if input is not a number or not between 0 and 6
+        document.getElementById("s").innerHTML = "Error: Please enter a number between 0 and 6";
+    } else {
+        // Otherwise, update the day element with the NepaliFunctions.GetBsDayUnicode result
+        document.getElementById("s").innerHTML = NepaliFunctions.GetBsDayUnicodeShort(shortweekinput.value);
+    }
+}
+
+    </script>
+</body>
+</html>

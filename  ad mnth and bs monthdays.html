@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADdate</title>
+</head>
+<body>
+    <h1>2.get ad and bs month in english and unicode</h1>
+    <input type="date" id="ddate" placeholder="YYYY-MM-DD"/>
+    <p id="cdate"></p>
+    <p id="ydate"></p>
+    <p id="mdate"></p>
+    <p id="tdate"></p>
+    <p id="nepali"></p>
+    <p id="bar"></p>
+    <p id="short"></p>
+    <p id="mon"></p>
+    <p id="days"></p>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
+    type="text/javascript"></script>
+    <script >
+        var month=NepaliFunctions.GetAdMonths()
+        var day=NepaliFunctions.GetAdDays()
+        var bsmonth=NepaliFunctions.GetBsMonths()
+        var shorts=NepaliFunctions.GetBsDaysUnicodeShort()
+        var dayss=NepaliFunctions.GetAdDaysShort()
+        var bsMonths = [];
+for (var i = 0; i < 12; i++) {
+  var nepaliMonth = NepaliFunctions.GetBsMonthInUnicode(i);
+  bsMonths.push(nepaliMonth);
+}
+        console.log(NepaliFunctions.GetBsMonthInUnicode(0))
+
+        var bar=NepaliFunctions.GetBsDaysUnicode()
+    
+        console.log(bsmonth)
+        // var bsday=NepaliFunctions.GetBsDays()
+        document.getElementById('ydate').textContent = ("the months are:"+JSON.stringify(month));
+        document.getElementById('cdate').textContent = ("the days are:"+JSON.stringify(day));
+        document.getElementById('mdate').textContent = ("the bsmonths are:"+JSON.stringify(bsmonth));
+        document.getElementById('nepali').textContent = ("the nepalimonths are:"+JSON.stringify(bsMonths));
+        document.getElementById('bar').textContent = ("the nepaliweek are:"+JSON.stringify(bar));
+        document.getElementById('short').textContent = ("the shnepaliweek are:"+JSON.stringify(shorts));
+        document.getElementById('mon').textContent = ("the adshort are:"+JSON.stringify(dayss));
+
+        
+        
+
+        // document.getElementById('tdate').textContent = ("the bsdays are:"+JSON.stringify(bsday));
+    </script>
+</body>
+</html>
+

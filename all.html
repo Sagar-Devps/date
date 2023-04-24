@@ -1,0 +1,60 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parse</title>
+    <style>
+        h1{
+            text-align: center;
+            color: #131212;
+        }
+    </style>
+<link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+    <h1>1.Parse-Date</h1>
+    <input type="text" id="bsdate" placeholder="YYYY-MM-DD" />
+
+    <div id="parsedDate"></div> <!-- Element to display parsed date -->
+
+   <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js" type="text/javascript"></script> 
+   <script>
+    var bsInput = document.getElementById('bsdate');
+    var parsedDateElement = document.getElementById('parsedDate');
+
+    bsInput.nepaliDatePicker({
+        dateFormat:"YYYY-MM-DD",
+        closeOnDateSelect: true,
+        onSelect: function(date) {
+            // Check if bsInput value is not empty or undefined
+            if (bsInput.value) {
+                var parsedDate = ParseDate(bsInput.value);
+                var convertedDate = ConvertToDateObject(bsInput.value, "YYYY-MM-DD");
+                parsedDateElement.textContent = "Parsed Date: " + JSON.stringify(parsedDate.parsedDate) + ", Format: " + parsedDate.parsedFormat + "<br>" +
+                                               "Converted Date: " + JSON.stringify(convertedDate);
+            }
+        }
+    });
+
+      // Function to parse Nepali date
+      function parseNepaliDate(nepaliDate) {
+        var dateParts = nepaliDate.split('-');
+        var year = parseInt(dateParts[0]);
+        var month = parseInt(dateParts[1]);
+        var day = parseInt(dateParts[2]);
+        return { year: year, month: month, day: day };
+    }
+
+    function convertToJSDate(nepaliDate) {
+        var engDate = NepaliFunctions.BS2AD(nepaliDate.year, nepaliDate.month, nepaliDate.day);
+        var jsDate = new Date(engDate.year, engDate.month - 1, engDate.day);
+        return jsDate;
+    }
+   </script>
+</body>
+</html>
+

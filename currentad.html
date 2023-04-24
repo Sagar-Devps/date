@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADdate</title>
+</head>
+<body>
+    <h1>2.AD-Date</h1>
+    <input type="text" id="ddate" placeholder="YYYY-MM-DD"/>
+    <p id="cdate"></p>
+    <p id="ydate"></p>
+    <p id="mdate"></p>
+    <p id="tdate"></p>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+    integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
+    type="text/javascript"></script>
+    <script >
+// Define the getDaySuffix(day) function
+function getDaySuffix(day) {
+    if (day >= 11 && day <= 13) {
+        return 'th';
+    }
+    switch (day % 10) {
+        case 1:
+            return 'st';
+        case 2:
+            return 'nd';
+        case 3:
+            return 'rd';
+        default:
+            return 'th';
+    }
+}
+
+// Get the current ad date object
+var adDateObj = NepaliFunctions.GetCurrentAdDate();
+
+// Extract year, month, and day components
+var year = adDateObj.year;
+var month = adDateObj.month;
+var day = adDateObj.day;
+var monthName = NepaliFunctions.GetCurrentAdMonth(month);
+var dayy = NepaliFunctions.GetCurrentAdDay(day);
+console.log(dayy);
+
+// Format the date in the "day of month of year" format
+var formattedDate = 'Today date is: Year: ' + year + ', Month: ' + monthName + ', Day: ' + day + getDaySuffix(day) ;
+document.getElementById('cdate').textContent = formattedDate;
+document.getElementById('ydate').textContent = ("the year is:"+NepaliFunctions.GetCurrentAdYear(year));
+document.getElementById('mdate').textContent = ("the month is:"+monthName);
+document.getElementById('tdate').textContent = ("the day is:"+dayy);
+
+
+
+    </script>
+</body>
+</html>

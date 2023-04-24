@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dateformat</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #131212;
+        }
+    </style>
+    <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
+        rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <h1>3.dateformat</h1>
+    <input type="text" id="bsdate" placeholder="YYYY-MM-DD" />
+    <div id="date"></div>
+    <p id="sdate"></p>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
+        type="text/javascript"></script>
+    <script>
+var bsInput = document.getElementById('bsdate');
+bsInput.nepaliDatePicker({
+    dateFormat: "YYYY-MM-DD",
+    closeOnDateSelect: true,
+    onChange: function () {
+        var date = bsInput.value;
+
+        var dateComponents = date.split('-');
+        var year = parseInt(dateComponents[0]);
+        var month = parseInt(dateComponents[1])-1;
+        var day = parseInt(dateComponents[2])+1;
+
+        // Create a new Date object with the retrieved date components
+        var dateObj = new Date(year, month, day);
+
+        // Format the date using built-in JavaScript date methods
+        var formattedDate = dateObj.toISOString().slice(0, 10);
+        document.getElementById('sdate').textContent = "Formatted Date: " + formattedDate;
+        console.log(formattedDate);
+    }
+});
+
+
+
+
+        console.log(NepaliFunctions.ConvertDateFormat({ year: 2077, month: 1, day: 1 }, "YYYY-MM-DD"));
+    </script>
+</body>
+
+</html>

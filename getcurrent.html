@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>bsdte</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #131212;
+        }
+    </style>
+    <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
+        rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <h1> BS Date</h1>
+    <input type="text" id="bsdate" placeholder="YYYY-MM-DD">
+    <p id="sdate"></p><br>
+    <p id="ydate"></p><br>
+    <p id="mdate"></p><br>
+    <p id="ddate"></p><br>
+    <p id="wdate"></p><br>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
+        type="text/javascript"></script>
+ <script>
+    
+    $(document).ready(function () {
+            var bsInput = document.getElementById('bsdate');
+        bsInput.nepaliDatePicker({
+            dateFormat: "YYYY-MM-DD",
+            closeOnDateSelect: true,
+            onChange: function ()
+             {
+                var date = bsInput.value;
+                var dateComponents = date.split('-');
+                console.log(dateComponents);
+             
+                document.getElementById('sdate').textContent = ("the date is:"+bsInput.value)
+                // for displaying year
+                // document.getElementById('sdate').textContent = ("the month is:"+bsInput.value.slice(0, 4))
+            }
+        });
+            // Get the current BS date object
+// Define a function to get the day suffix
+function getDaySuffix(day) {
+    if (day >= 11 && day <= 13) {
+        return 'th';
+    }
+    switch (day % 10) {
+        case 1:
+            return 'st';
+        case 2:
+            return 'nd';
+        case 3:
+            return 'rd';
+        default:
+            return 'th';
+    }
+}
+
+// Get the current BS date object
+var bsDateObj = NepaliFunctions.GetCurrentBsDate();
+
+// Extract year, month, and day components
+var year = bsDateObj.year;
+var month = bsDateObj.month;
+var day = bsDateObj.day;
+
+// Call the NepaliFunctions.GetCurrentBsMonthName() function to get the name of the Nepali month
+var monthName = NepaliFunctions.GetCurrentBsMonth(month);
+
+// Format the date in the "day of month of year" format
+var formattedDate = 'Year: ' + year + ', Month: ' + monthName + ', Day: ' + day + getDaySuffix(day);
+// Set the text content of the element with id "ddate" to the formatted date
+document.getElementById('ddate').textContent = 'Today date is: ' + formattedDate;
+document.getElementById('mdate').textContent = 'Today month is: ' + monthName;
+document.getElementById('ydate').textContent = 'Today year is: ' + year;
+document.getElementById('wdate').textContent = 'The day is: ' + NepaliFunctions.GetCurrentBsDay(day);
+
+    });
+
+
+
+        </script>
+</body>
+
+</html>

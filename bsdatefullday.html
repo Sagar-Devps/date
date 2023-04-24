@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parse</title>
+    <style>
+        h1 {
+            text-align: center;
+            color: #131212;
+        }
+    </style>
+    <link href="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/css/nepali.datepicker.v4.0.1.min.css"
+        rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <h1>getfullbsdate</h1>
+    <input type="text" id="bsdate" placeholder="YYYY-MM-DD" />
+    <p id="sdate"></p>
+    <p id="tdate"></p>
+    <div id="parsedDate"></div>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"
+        integrity="sha256-oP6HI9z1XaZNBrJURtCoUT5SUnxFr8s3BzRl+cbzUq8=" crossorigin="anonymous"></script>
+
+    <script src="http://nepalidatepicker.sajanmaharjan.com.np/nepali.datepicker/js/nepali.datepicker.v4.0.1.min.js"
+        type="text/javascript"></script>
+    <script>
+        var bsInput = document.getElementById('bsdate');
+bsInput.nepaliDatePicker({
+    dateFormat: "YYYY-MM-DD",
+    closeOnDateSelect: true,
+    onChange:function(){
+        var datestring = bsInput.value;
+        var dateComponents = datestring.split('-');
+        var year = dateComponents[0];
+        var month = dateComponents[1];
+        var day = dateComponents[2];
+        var full=NepaliFunctions.GetBsFullDay({year:year,month:month,day:day});
+        var fully=NepaliFunctions.GetBsFullDayInUnicode({year:year,month:month,day:day});
+        document.getElementById('sdate').innerHTML=full;
+        document.getElementById('tdate').innerHTML=fully;
+
+    }
+});
+
+    </script>
+</body>
+
+</html>
